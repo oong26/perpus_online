@@ -1,0 +1,234 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 01, 2020 at 07:13 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `perpus`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `books`
+--
+
+CREATE TABLE `books` (
+  `book_code` varchar(5) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `year` year(4) NOT NULL,
+  `isbn` varchar(13) NOT NULL,
+  `publisher` varchar(70) NOT NULL,
+  `id_book_category` int(4) NOT NULL,
+  `summary` text NOT NULL,
+  `stock` int(5) NOT NULL,
+  `cover` varchar(255) NOT NULL,
+  `location` varchar(50) NOT NULL DEFAULT '''Unknown''',
+  `is_available_online` enum('Yes','No') NOT NULL,
+  `pdf_file` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_category`
+--
+
+CREATE TABLE `book_category` (
+  `id_category` int(4) NOT NULL,
+  `book_category` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fine_type`
+--
+
+CREATE TABLE `fine_type` (
+  `id_fine_type` int(2) NOT NULL,
+  `fine` int(5) NOT NULL,
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loans`
+--
+
+CREATE TABLE `loans` (
+  `loan_code` varchar(5) NOT NULL,
+  `user_code` varchar(5) NOT NULL,
+  `book_code` varchar(5) NOT NULL,
+  `loan_date` datetime NOT NULL,
+  `extend_date` datetime NOT NULL,
+  `return_date` datetime NOT NULL,
+  `id_fine_type` int(2) NOT NULL DEFAULT 0,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `id_role` int(1) NOT NULL,
+  `role` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id_role`, `role`) VALUES
+(1, 'Super Admin'),
+(2, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_code` varchar(5) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` text DEFAULT NULL,
+  `phone` varchar(20) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `id_role` int(1) NOT NULL,
+  `is_active` int(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_code`, `name`, `username`, `email`, `address`, `phone`, `password`, `img`, `id_role`, `is_active`, `created_at`, `updated_at`) VALUES
+('U0001', 'Oong', 'oong26', 'mkhalil26122000@gmail.com', 'Bondowoso', '085331053300', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U0001avr pin.png', 1, 0, '2020-05-27 00:48:06', '2020-06-01 04:30:14'),
+('U0002', 'Khalil', 'mkhalil122', 'khalil@gmail.com', 'Bondowoso', '085331445778', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U00023.PNG', 2, 0, '2020-05-27 00:48:06', '2020-05-29 01:55:45'),
+('U0003', 'User 2', 'user2', 'user2@gmail.com', 'Bondowoso', '081445336554', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U0003WhatsApp Image 2020-04-14 at 12.18.22 PM (1).jpeg', 2, 0, '2020-05-29 01:52:32', '2020-05-29 02:23:04');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`book_code`),
+  ADD KEY `id_book_category` (`id_book_category`);
+
+--
+-- Indexes for table `book_category`
+--
+ALTER TABLE `book_category`
+  ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `fine_type`
+--
+ALTER TABLE `fine_type`
+  ADD PRIMARY KEY (`id_fine_type`);
+
+--
+-- Indexes for table `loans`
+--
+ALTER TABLE `loans`
+  ADD PRIMARY KEY (`loan_code`),
+  ADD KEY `user_code` (`user_code`),
+  ADD KEY `book_code` (`book_code`),
+  ADD KEY `id_fine_type` (`id_fine_type`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id_role`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_code`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD KEY `id_role` (`id_role`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `book_category`
+--
+ALTER TABLE `book_category`
+  MODIFY `id_category` int(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `fine_type`
+--
+ALTER TABLE `fine_type`
+  MODIFY `id_fine_type` int(2) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id_role` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `books`
+--
+ALTER TABLE `books`
+  ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`id_book_category`) REFERENCES `book_category` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `loans`
+--
+ALTER TABLE `loans`
+  ADD CONSTRAINT `loans_ibfk_1` FOREIGN KEY (`book_code`) REFERENCES `books` (`book_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `loans_ibfk_2` FOREIGN KEY (`user_code`) REFERENCES `users` (`user_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `loans_ibfk_3` FOREIGN KEY (`id_fine_type`) REFERENCES `fine_type` (`id_fine_type`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
