@@ -24,13 +24,25 @@ class BookController extends Controller
 
     public function store(Request $req){
         // Get the last book code
-        $lastBookCode = Books::orderBy('book_code', 'desc')->first()->book_code;
+        $data = DB::table('books')
+                ->get();
 
-        // Get last 3 digits of last book code=
-        $lastIncreament = substr($lastBookCode, 1);
+        $bookCode = null;
 
-        // Make a new order id with appending last increment + 1
-        $bookCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+        if($data->count() > 0){
+            $lastBookCode = Books::orderBy('book_code', 'desc')->first()->book_code;
+
+            // Get last 3 digits of last book code=
+            $lastIncreament = substr($lastBookCode, 1);
+
+            // Make a new order id with appending last increment + 1
+            $bookCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+
+        }
+        else{
+            $bookCode = "0001";
+        }
+
         $this->validate($req,[
             'title' => 'required',
             'author' => 'required',
@@ -57,6 +69,7 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'id_book_category' => 1,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -76,6 +89,7 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'id_book_category' => 1,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
