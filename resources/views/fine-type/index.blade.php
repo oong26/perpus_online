@@ -39,7 +39,7 @@
                       @foreach($data as $ftype)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$ftype['fine']}}</td>
+                          <td>Rp {{$ftype['fine']}}</td>
                           <td>{{$ftype['type']}}</td>
                           <td>
                             <form class="form-group pull-right" action="#" method="POST">
