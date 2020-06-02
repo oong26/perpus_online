@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 
 class RoleController extends Controller
 {
     public function index(){
-        return view('role.index');
+        $data = Role::all()->toArray();
+        
+        return view('role.index', compact('data'));
     }
 
     public function add(){

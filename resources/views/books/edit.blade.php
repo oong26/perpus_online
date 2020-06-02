@@ -47,8 +47,28 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputPublisher">Publisher</label>
-                    <input type="text" class="form-control" id="inputPublisher" name="publisher" placeholder="Book Publisher" value="{{$item['publisher']}}" required>
+                    <label for="inputPublisher">Publisher & Total Page</label>
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" class="form-control" id="inputPublisher" name="publisher" placeholder="Book Publisher" value="{{$item['publisher']}}" required>
+                      </div>
+                      <div class="col">
+                        <input type="number" class="form-control" id="inputPublisher" name="total_page" placeholder="Total page" value="{{$item['total_page']}}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputCategory">Genre</label>
+                    <select class="form-control" id="inputCategory" name="book_category">
+                      <option value="">Select choice</option>
+                      $@foreach ($category as $cate)
+                      @if($cate['id_category'] == $item['id_book_category'])
+                      <option value="{{$cate['id_category']}}" selected>{{$cate['book_category']}}</option>
+                      @else
+                      <option value="{{$cate['id_category']}}">{{$cate['book_category']}}</option>
+                      @endif
+                      @endforeach
+                  </select>
                   </div>
                   <div class="form-group">
                     <label>Summary</label>
