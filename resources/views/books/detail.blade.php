@@ -41,7 +41,8 @@
                     <label>Author :</label>&nbsp;<label class="font-weight-light">{{$data['author']}}</label><br>
                     <label>Year :</label>&nbsp;<label class="font-weight-light">{{$data['year']}}</label><br>
                     <label>Publisher :</label>&nbsp;<label class="font-weight-light">{{$data['publisher']}}</label><br>
-                    <label>Updated at :</label>&nbsp;<label class="font-weight-light">{{$data['updated_at']}}</label><br>
+                    <label>Category :</label>&nbsp;<label class="font-weight-light">{{$data['book_category']}}</label><br>
+                    <label>Total page :</label>&nbsp;<label class="font-weight-light">{{$data['total_page']}}</label><br>
                     <label>Stock :</label>&nbsp;<label class="font-weight-light">{{$data['stock']}}</label><br>
                     <label>Offline Location :</label>&nbsp;<label class="font-weight-light">{{$data['location']}}</label><br>
                     <label>Available in online :</label>&nbsp;<label class="font-weight-light">{{$data['is_available_online']}}</label><br>
@@ -50,6 +51,7 @@
                     @else
                       <label>PDF File :</label>&nbsp;-<br>
                     @endif
+                    <label>Last Updated at :</label>&nbsp;<label class="font-weight-light">{{$data['updated_at']}}</label><br>
                 </div>
               </div>
               <div class="row ml-0 mr-0">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2020 at 07:13 AM
+-- Generation Time: Jun 02, 2020 at 07:41 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -39,12 +39,21 @@ CREATE TABLE `books` (
   `summary` text NOT NULL,
   `stock` int(5) NOT NULL,
   `cover` varchar(255) NOT NULL,
+  `total_page` int(5) NOT NULL,
   `location` varchar(50) NOT NULL DEFAULT '''Unknown''',
   `is_available_online` enum('Yes','No') NOT NULL,
   `pdf_file` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`book_code`, `title`, `author`, `year`, `isbn`, `publisher`, `id_book_category`, `summary`, `stock`, `cover`, `total_page`, `location`, `is_available_online`, `pdf_file`, `created_at`, `updated_at`) VALUES
+('B0001', 'Belajar Bahasa Pemrograman Java', 'Oong', 2017, '1234561112233', 'KONAMI', 2, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec imperdiet mauris. Morbi nec lobortis ante. Morbi condimentum mauris at leo ultrices, vel tincidunt sem laoreet. Nullam laoreet diam a commodo gravida. Vestibulum mattis nisl sapien. Morbi condimentum sit amet tortor eu fermentum. Etiam sagittis, tortor vitae molestie hendrerit, magna neque condimentum lectus, sollicitudin viverra arcu ipsum vel mauris. Duis bibendum faucibus urna ut hendrerit.</p>', 24, 'B0001Screenshot_1582380487.png', 220, 'Rak A', 'No', NULL, '2020-06-02 02:58:37', '2020-06-02 02:58:37'),
+('B0002', 'Belajar HTML Dasar', 'Oong', 2015, '1112224445567', 'RPL', 2, '<p>Oong</p>', 8, 'B0002Screenshot_1579760092.png', 212, 'Rak A', 'No', NULL, '2020-06-02 03:26:55', '2020-06-02 05:05:46');
 
 -- --------------------------------------------------------
 
@@ -56,6 +65,14 @@ CREATE TABLE `book_category` (
   `id_category` int(4) NOT NULL,
   `book_category` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `book_category`
+--
+
+INSERT INTO `book_category` (`id_category`, `book_category`) VALUES
+(1, 'Fiksi'),
+(2, 'Teknologi');
 
 -- --------------------------------------------------------
 
@@ -133,7 +150,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_code`, `name`, `username`, `email`, `address`, `phone`, `password`, `img`, `id_role`, `is_active`, `created_at`, `updated_at`) VALUES
 ('U0001', 'Oong', 'oong26', 'mkhalil26122000@gmail.com', 'Bondowoso', '085331053300', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U0001avr pin.png', 1, 0, '2020-05-27 00:48:06', '2020-06-01 04:30:14'),
 ('U0002', 'Khalil', 'mkhalil122', 'khalil@gmail.com', 'Bondowoso', '085331445778', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U00023.PNG', 2, 0, '2020-05-27 00:48:06', '2020-05-29 01:55:45'),
-('U0003', 'User 2', 'user2', 'user2@gmail.com', 'Bondowoso', '081445336554', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', 'U0003WhatsApp Image 2020-04-14 at 12.18.22 PM (1).jpeg', 2, 0, '2020-05-29 01:52:32', '2020-05-29 02:23:04');
+('U0003', 'User 2', 'user2', 'user2@gmail.com', 'Bondowoso', '081445336554', '$2y$10$zIl9WAoV9tGx5jvxGj9TMe09JlI7R5x/ywwETEAiQUpPj9tHmmm4K', NULL, 2, 0, '2020-05-29 01:52:32', '2020-05-29 02:23:04');
 
 --
 -- Indexes for dumped tables
@@ -190,7 +207,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `book_category`
 --
 ALTER TABLE `book_category`
-  MODIFY `id_category` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fine_type`

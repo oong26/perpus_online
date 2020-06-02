@@ -7,36 +7,49 @@ use Illuminate\Support\Facades\DB;
 use Eloquent;
 use File;
 use App\Books;
+use App\BookCategory;
 
 class BookController extends Controller
 {
     public function index(){
         $books = Books::all()
                     ->toArray();
+        
         // $users = Users::leftJoin('role', 'users.id_role', '=', 'role.id_role')->();
         // return view('user', compact('users'));
         return view('books.index', compact('books'));
     }
 
     public function add(){
-        return view('books.add');
+        $category = BookCategory::all()->toArray();
+        return view('books.add', compact('category'));
     }
 
     public function store(Request $req){
-        // Get the last book code
-        $lastBookCode = Books::orderBy('book_code', 'desc')->first()->book_code;
-
-        // Get last 3 digits of last book code=
-        $lastIncreament = substr($lastBookCode, 1);
-
-        // Make a new order id with appending last increment + 1
-        $bookCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+        $data = DB::table('books')->get();
+        
+        $bookCode = null;
+        if($data->count() > 0){// Get the last book code
+            $lastBookCode = Books::orderBy('book_code', 'desc')->first()->book_code;
+    
+            // Get last 3 digits of last book code=
+            $lastIncreament = substr($lastBookCode, 1);
+    
+            // Make a new order id with appending last increment + 1
+            $bookCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+        }
+        else{
+            $bookCode = '0001';
+        }
+        
         $this->validate($req,[
             'title' => 'required',
             'author' => 'required',
             'year' => 'required',
             'isbn' => 'required',
             'publisher' => 'required',
+            'total_page' => 'required',
+            'book_category' => 'required',
             'summary' => 'required',
             'stock' => 'required',
             'is_online' => 'required',
@@ -57,6 +70,8 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'total_page' => $req->total_page,
+                'id_book_category' => $req->book_category,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -76,6 +91,8 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'total_page' => $req->total_page,
+                'id_book_category' => $req->book_category,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -93,15 +110,27 @@ class BookController extends Controller
     }
 
     public function detail($bookCode){
-        $book = Books::where('book_code',$bookCode)->paginate();
+        // $book = Books::where('book_code',$bookCode)->get();
+        $book = DB::table('books')
+                ->where('book_code',$bookCode)
+                ->join('book_category', 'book_category.id_category', 'books.id_book_category')
+                ->get();
 
-        return view('books.detail', ['book' => $book]);
+        return view('books.detail', ['book' => json_decode($book, true)]);
+        // return $book;
+        // return json_decode($book, true);
     }
 
     public function edit($bookCode){
-        $book = Books::where('book_code',$bookCode)->paginate();
+        // $book = Books::where('book_code',$bookCode)->paginate();
+        $book = DB::table('books')
+                ->where('book_code',$bookCode)
+                ->join('book_category', 'book_category.id_category', 'books.id_book_category')
+                ->get();
 
-        return view('books.edit', ['book' => $book]);
+        $category = BookCategory::all()->toArray();
+
+        return view('books.edit', ['book' => json_decode($book, true)], compact('category'));
     }
     
     public function update(Request $req){
@@ -112,6 +141,8 @@ class BookController extends Controller
             'year' => 'required',
             'isbn' => 'required',
             'publisher' => 'required',
+            'total_page' => 'required',
+            'book_category' => 'required',
             'summary' => 'required',
             'stock' => 'required',
             'is_online' => 'required',
@@ -135,6 +166,7 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'total_page' => $req->total_page,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -157,6 +189,7 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
+                'total_page' => $req->total_page,
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -176,6 +209,14 @@ class BookController extends Controller
             ]);
     
             $file->move($upload_path, $bookCode.$file->getClientOriginalName());
+        }
+
+        if($req->book_category != "" && $req->book_category != 'Select choice'){
+            //If book category not null
+            DB::table('books')->where('book_code', $bookCode)->update([
+                'id_book_category' => $req->book_category,
+                'updated_at' => now()
+            ]);
         }
 
         return redirect('/book');

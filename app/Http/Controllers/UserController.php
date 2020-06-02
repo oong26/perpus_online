@@ -17,8 +17,7 @@ class UserController extends Controller
                 ->join('role', 'role.id_role', 'users.id_role')
                 ->orderBy('created_at', 'ASC')
                 ->get();
-        // $users = Users::leftJoin('role', 'users.id_role', '=', 'role.id_role')->();
-        // return view('user', compact('users'));
+                
         return view('users.index', ['users' => $users]);
     }
 
