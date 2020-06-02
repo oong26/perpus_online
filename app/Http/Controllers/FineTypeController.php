@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\FineType;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -8,7 +10,8 @@ use Illuminate\Http\Request;
 class FineTypeController extends Controller
 {
     public function index(){
-        return view('fine-type.index');
+        $data = FineType::all()->toArray();
+        return view('fine-type.index', compact('data'));
     }
 
     public function add(){

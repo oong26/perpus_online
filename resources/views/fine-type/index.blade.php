@@ -30,17 +30,28 @@
                       <thead>
                         <tr>
                           <th> # </th>
-                          <th> User Code </th>
-                          <th> Name </th>
-                          <th> Username </th>
-                          <th> Email </th>
-                          <th> Address </th>
-                          <th> Phone </th>
-                          <th> Role </th>
-                          <th> Options </th>
+                          <th> fine </th>
+                          <th> Type </th>
+                          <th> Option </th>
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach($data as $ftype)
+                        <tr>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$ftype['fine']}}</td>
+                          <td>{{$ftype['type']}}</td>
+                          <td>
+                            <form class="form-group pull-right" action="#" method="POST">
+                              {{csrf_field()}}
+                              {{method_field('delete')}}
+                              <a href="#"> <span class="mdi mdi-lead-pencil" style="color:#32bf90;"></span></a>
+                              <button type="submit" style="background:none;border:none;color:#007bff;"><span class="mdi mdi-delete" style="color:#32bf90;"></i></button>
+                            </form>
+                            {{-- <a href="#"}}> <span class="mdi mdi-delete"></span></a> --}}
+                          </td>
+                        </tr>
+                      @endforeach
                       </tbody>
                     </table>
                   </div>
