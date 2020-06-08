@@ -20,25 +20,25 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#menu-library" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-title">Library</span>
           <i class="menu-arrow"></i>
           <i class="mdi mdi-book menu-icon"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="menu-library">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/book">Books</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">Book Category</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/book-category">Book Category</a></li>
           </ul>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#menu-user" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-title">Users</span>
           <i class="menu-arrow"></i>
           <i class="mdi mdi-account-group menu-icon"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="menu-user">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/user">Data</a></li>
             <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/role">Role</a></li>

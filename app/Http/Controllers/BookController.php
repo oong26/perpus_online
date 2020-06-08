@@ -46,6 +46,22 @@ class BookController extends Controller
             $bookCode = "0001";
         }
 
+        $data = DB::table('books')->get();
+        
+        $bookCode = null;
+        if($data->count() > 0){// Get the last book code
+            $lastBookCode = Books::orderBy('book_code', 'desc')->first()->book_code;
+    
+            // Get last 3 digits of last book code=
+            $lastIncreament = substr($lastBookCode, 1);
+    
+            // Make a new order id with appending last increment + 1
+            $bookCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+        }
+        else{
+            $bookCode = '0001';
+        }
+
         $this->validate($req,[
             'title' => 'required',
             'author' => 'required',
@@ -74,12 +90,9 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
-<<<<<<< HEAD
                 'id_book_category' => 1,
-=======
                 'total_page' => $req->total_page,
                 'id_book_category' => $req->book_category,
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -99,12 +112,9 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
-<<<<<<< HEAD
                 'id_book_category' => 1,
-=======
                 'total_page' => $req->total_page,
                 'id_book_category' => $req->book_category,
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,

@@ -58,17 +58,17 @@ Route::prefix('book')->group(function(){
 
 Route::prefix('book-category')->group(function(){
 
-    Route::get('', 'BookController@index');
+    Route::get('', 'CategoryController@index');
 
-    Route::get('add', 'BookController@add');
+    Route::get('add', 'CategoryController@add');
     
-    Route::post('store', 'BookController@store');
+    Route::post('store', 'CategoryController@store');
     
-    Route::get('edit/{id_category}', 'BookController@edit');
+    Route::get('edit/{id_category}', 'CategoryController@edit');
     
-    Route::post('update', 'BookController@update');
+    Route::post('update', 'CategoryController@update');
     
-    Route::delete('delete/{id_category}', 'BookController@delete');
+    Route::delete('delete/{id_category}', 'CategoryController@delete');
 });
 
 Route::prefix('role')->group(function(){
