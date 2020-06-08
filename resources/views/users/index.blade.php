@@ -58,7 +58,6 @@
                                   <a href="user/edit/{{$data->user_code}}"> <span class="mdi mdi-lead-pencil" style="color:#32bf90;"></span></a>
                                   <button type="submit" style="background:none;border:none;color:#007bff;"><span class="mdi mdi-delete" style="color:#32bf90;"></i></button>
                                 </form>
-                                {{-- <a href="user/delete/{{$data->user_code}}"> <span class="mdi mdi-delete"></span></a> --}}
                             </td>
                           </tr>
                           @endforeach

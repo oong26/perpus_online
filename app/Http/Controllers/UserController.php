@@ -27,14 +27,25 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        // Get the last order id
-        $lastorderId = Users::orderBy('user_code', 'desc')->first()->user_code;
+        // Get the last book code
+        $data = DB::table('users')->get();
 
-        // Get last 3 digits of last order id
-        $lastIncreament = substr($lastorderId, 1);
+        $userCode = null;
 
-        // Make a new order id with appending last increment + 1
-        $newOrderCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+        if($data->count() > 0){
+            $lastUserCode = Books::orderBy('users_code', 'desc')->first()->user_code;
+
+            // Get last 3 digits of last book code=
+            $lastIncreament = substr($lastUserCode, 1);
+
+            // Make a new order id with appending last increment + 1
+            $userCode = str_pad($lastIncreament + 1, 4, 0, STR_PAD_LEFT);
+
+        }
+        else{
+            $userCode = "0001";
+        }
+
         $this->validate($request,[
             'name' => 'required',
             'username' => 'required',

@@ -26,7 +26,6 @@ class BookController extends Controller
     }
 
     public function store(Request $req){
-<<<<<<< HEAD
         // Get the last book code
         $data = DB::table('books')
                 ->get();
@@ -47,7 +46,6 @@ class BookController extends Controller
             $bookCode = "0001";
         }
 
-=======
         $data = DB::table('books')->get();
         
         $bookCode = null;
@@ -63,8 +61,7 @@ class BookController extends Controller
         else{
             $bookCode = '0001';
         }
-        
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
+
         $this->validate($req,[
             'title' => 'required',
             'author' => 'required',
@@ -93,12 +90,9 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
-<<<<<<< HEAD
                 'id_book_category' => 1,
-=======
                 'total_page' => $req->total_page,
                 'id_book_category' => $req->book_category,
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
@@ -118,12 +112,9 @@ class BookController extends Controller
                 'year' => $req->year,
                 'isbn' => $req->isbn,
                 'publisher' => $req->publisher,
-<<<<<<< HEAD
                 'id_book_category' => 1,
-=======
                 'total_page' => $req->total_page,
                 'id_book_category' => $req->book_category,
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
                 'summary' => $req->summary,
                 'stock' => $req->stock,
                 'location' => $req->location,
