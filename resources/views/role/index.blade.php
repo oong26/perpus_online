@@ -35,15 +35,12 @@
                         </tr>
                       </thead>
                       <tbody>
-<<<<<<< HEAD
-                        
-=======
                       @foreach($data as $role)
                         <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$role['role']}}</td>
                           <td>
-                            <form class="form-group pull-right" action="#" method="POST">
+                            <form class="form-group pull-right" action="role/delete/{{$role['id_role']}}" method="POST">
                               {{csrf_field()}}
                               {{method_field('delete')}}
                               <a href="#"> <span class="mdi mdi-lead-pencil" style="color:#32bf90;"></span></a>
@@ -53,7 +50,6 @@
                           </td>
                         </tr>
                       @endforeach
->>>>>>> e216efe80d837f43bd829d6c59461772391b640b
                       </tbody>
                     </table>
                   </div>
