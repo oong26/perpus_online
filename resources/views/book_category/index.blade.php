@@ -14,7 +14,7 @@
             </h3>
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
-                  <a href="role/add">
+                  <a href="#">
                     <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><span class="mdi mdi-plus"></span>&nbsp;Add new category</button>
                   </a>
               </ul>
