@@ -23,6 +23,8 @@ Route::get('logout', 'LoginController@logout');
 
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::get('/profile', 'ProfileController@index');
+
 //Users
 Route::prefix('user')->group(function(){
     
