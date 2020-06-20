@@ -33,7 +33,7 @@ class UserController extends Controller
         $userCode = null;
 
         if($data->count() > 0){
-            $lastUserCode = Books::orderBy('users_code', 'desc')->first()->user_code;
+            $lastUserCode = Users::orderBy('user_code', 'desc')->first()->user_code;
 
             // Get last 3 digits of last book code=
             $lastIncreament = substr($lastUserCode, 1);
@@ -62,7 +62,7 @@ class UserController extends Controller
         $upload_path = 'uploaded_files/profile_photos';
 
         DB::table('users')->insert([
-            'user_code' => 'U'.$newOrderCode,
+            'user_code' => 'U'.$userCode,
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
@@ -70,10 +70,11 @@ class UserController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'id_role' => $request->role,
-            'img' => 'U'.$newOrderCode.$file->getClientOriginalName()
+            'img' => 'U'.$userCode.$file->getClientOriginalName(),
+            'is_active' => 1
         ]);
 
-        $file->move($upload_path, 'U'.$newOrderCode.$file->getClientOriginalName());
+        $file->move($upload_path, 'U'.$userCode.$file->getClientOriginalName());
 
         return redirect('/user');
     }
@@ -95,10 +96,18 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'is_active' => 'required'
         ]);
 
-       try{
+        if($request->is_active == 'Select choice'){
+            $is_active = 0;
+        }
+        else{
+            $is_active = $request->is_active;
+        }
+
+        try{
             $file = $request->file('file');
             $upload_path = 'uploaded_files/profile_photos';
             if($file != null){
@@ -113,9 +122,9 @@ class UserController extends Controller
                     'phone' => $request->phone,
                     'id_role' => $request->role,
                     'img' => $request->user_code.$file->getClientOriginalName(),
-                    'updated_at' => now()
-                    // 'updated_at' => Carbon::now()->toDateTimeString()
-                ]);
+                    'is_active' => $is_active,
+                    'updated_at' => now()]);
+
                 $file->move($upload_path, $request->user_code.$file->getClientOriginalName());
                 $request->session()->put('img', $request->user_code.$file->getClientOriginalName());
             }
@@ -131,8 +140,8 @@ class UserController extends Controller
                     'phone' => $request->phone,
                     'id_role' => $request->role,
                     'img' => $request->user_code.$file->getClientOriginalName(),
+                    'is_active' => $is_active,
                     'updated_at' => now()
-                    // 'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
                 $file->move($upload_path, $request->user_code.$file->getClientOriginalName());
                 $request->session()->put('img', $request->user_code.$file->getClientOriginalName());
@@ -145,8 +154,8 @@ class UserController extends Controller
                     'address' => $request->address,
                     'phone' => $request->phone,
                     'id_role' => $request->role,
+                    'is_active' => $is_active,
                     'updated_at' => now()
-                    // 'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
             } 
 
@@ -156,17 +165,23 @@ class UserController extends Controller
                 ]);
             }
             return redirect('/user');
-       }
-       catch(Exception $ex){
-           return abort(404);
-       }
+        }
+        catch(Exception $ex){
+            return abort(404);
+        }
 
         return redirect('/user');
     }
 
     public function delete($user_code, $img){
         DB::table('users')->where('user_code', $user_code)->delete();
-        File::delete('uploaded_files/profile_photos/'.$img);
+        $path = public_path().'\uploaded_files\profile_photos\\'.$img;
+
+        if($img != null){
+            if(file_exists($path)){
+                File::delete('uploaded_files/profile_photos/'.$img);
+            }
+        }
 
         return redirect('/user');
     }

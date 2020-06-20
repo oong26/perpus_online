@@ -28,7 +28,26 @@ class RoleController extends Controller
         return redirect('/role');
     }
 
-    public function delete(){
+    public function edit($id_role){
+        $data = DB::table('role')->where('id_role', $id_role)->get();
         
+        return view('role.edit', ['data' => $data]);
+    }
+
+    public function update(Request $req){
+        $this->validate($req,[
+            'id_role' => 'required',
+            'role' => 'required'
+        ]);
+
+        DB::table('role')->where('id_role', $req->id_role)->update(['role' => $req->role]);
+
+        return redirect('/role');
+    }
+
+    public function delete($id_role){
+        DB::table('role')->where('id_role', $id_role)->delete();
+
+        return redirect('/role');
     }
 }

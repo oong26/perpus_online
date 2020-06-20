@@ -59,13 +59,13 @@
                   </div>
                   <div class="form-group">
                     <label for="inputCategory">Genre</label>
-                    <select class="form-control" id="inputCategory" name="book_category">
+                    <select class="form-control" id="inputCategory" name="book_genre">
                       <option value="">Select choice</option>
-                      $@foreach ($category as $cate)
-                      @if($cate['id_category'] == $item['id_book_category'])
-                      <option value="{{$cate['id_category']}}" selected>{{$cate['book_category']}}</option>
+                      $@foreach ($genre as $cate)
+                      @if($cate['id_genre'] == $item['id_book_genre'])
+                      <option value="{{$cate['id_genre']}}" selected>{{$cate['book_genre']}}</option>
                       @else
-                      <option value="{{$cate['id_category']}}">{{$cate['book_category']}}</option>
+                      <option value="{{$cate['id_genre']}}">{{$cate['book_genre']}}</option>
                       @endif
                       @endforeach
                   </select>
@@ -127,7 +127,7 @@
                     </div>
                   </div>
                   <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                  <a href="../" class="btn btn-light">Cancel</a>
+                <a href="../detail/{{$item['book_code']}}" class="btn btn-light">Cancel</a>
                 </form>
                   @endforeach
                 </div>

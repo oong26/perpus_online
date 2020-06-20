@@ -60,11 +60,11 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="inputCategory">Genre</label>
-                            <select class="form-control" id="inputCategory" name="book_category">
+                            <label for="inputGenre">Genre</label>
+                            <select class="form-control" id="inputGenre" name="book_genre">
                               <option value="">Select choice</option>
-                              $@foreach ($category as $item)
-                              <option value="{{$item['id_category']}}">{{$item['book_category']}}</option>
+                              $@foreach ($genre as $item)
+                              <option value="{{$item['id_genre']}}">{{$item['book_genre']}}</option>
                               @endforeach
                           </select>
                           </div>

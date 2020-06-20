@@ -10,12 +10,12 @@
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-account-group"></i>
-              </span> Book Category 
+              </span> Book Genre 
             </h3>
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
-                  <a href="#">
-                    <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><span class="mdi mdi-plus"></span>&nbsp;Add new category</button>
+                  <a href="book-genre/add">
+                    <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><span class="mdi mdi-plus"></span>&nbsp;Add new genre</button>
                   </a>
               </ul>
             </nav>
@@ -24,13 +24,13 @@
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Book Category</h4>
+                  <h4 class="card-title">Book Genre</h4>
                   <div class="table-responsive">
                     <table  id="example" class="table">
                       <thead>
                         <tr>
                           <th> # </th>
-                          <th> Category </th>
+                          <th> Genre </th>
                           <th> Options </th>
                         </tr>
                       </thead>
@@ -38,12 +38,12 @@
                       @foreach($data as $item)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$item['book_category']}}</td>
+                          <td>{{$item['book_genre']}}</td>
                           <td>
-                            <form class="form-group pull-right" action="book-category/delete/{{$item['id_category']}}" method="POST">
+                            <form class="form-group pull-right" action="book-genre/delete/{{$item['id_genre']}}" method="POST">
                               {{csrf_field()}}
                               {{method_field('delete')}}
-                              <a href="book-category/edit/{{$item['id_category']}}"> <span class="mdi mdi-lead-pencil" style="color:#32bf90;"></span></a>
+                              <a href="book-genre/edit/{{$item['id_genre']}}"> <span class="mdi mdi-lead-pencil" style="color:#32bf90;"></span></a>
                               <button type="submit" style="background:none;border:none;color:#007bff;"><span class="mdi mdi-delete" style="color:#32bf90;"></i></button>
                             </form>
                           </td>

@@ -28,7 +28,7 @@
         <div class="collapse" id="menu-library">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/book">Books</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/book-category">Book Category</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/perpus_online/public/book-genre">Book Genre</a></li>
           </ul>
         </div>
       </li>
@@ -49,6 +49,12 @@
         <a class="nav-link" href="/perpus_online/public/fine-type">
           <span class="menu-title">Fine Type</span>
           <i class="mdi mdi-wallet-travel menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/perpus_online/public/loans">
+          <span class="menu-title">Loans</span>
+          <i class="mdi mdi-shopping menu-icon"></i>
         </a>
       </li>
     </ul>

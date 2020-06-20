@@ -13,11 +13,11 @@
           <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-account-group"></i>
           </span>
-          Add new fine type
+          Add new book genre
         </h3>
         <nav aria-label="breadcrumb">
           <ul class="breadcrumb">
-              <a href="../fine-type">Fine Type</a>&nbsp;/&nbsp;Add new fine type
+              <a href="../book-genre">Book Genre</a>&nbsp;/&nbsp;Edit new book genre
           </ul>
         </nav>
       </div>
@@ -25,25 +25,24 @@
           <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Fine Type</h4>
-                  <p class="card-description"> Add new fine type </p>
+                  <h4 class="card-title">Book Genre</h4>
+                  <p class="card-description"> Edit new book genre </p>
+                  @foreach (data as $item)
                   <form action="store" class="forms-sample" method="POST" enctype="multipart/form-data">
-                      {{ csrf_field() }}
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id_genre" value="{{$item->id_genre}}">
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
-                          <label for="exampleInputName1">Fine</label>
-                          <input type="text" class="form-control" id="exampleInputName1" name="fine" placeholder="Fine">
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputName2">Type</label>
-                          <input type="text" class="form-control" id="exampleInputName2" name="type" placeholder="Type">
+                          <label for="exampleInputName1">Book Genre</label>
+                          <input type="text" class="form-control" id="exampleInputName1" name="genre" value="{{$item->book_genre}}" placeholder="Genre">
                         </div>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <a href="../fine-type" class="btn btn-light">Cancel</a>
+                    <a href="../book-genre" class="btn btn-light">Cancel</a>
                   </form>
+                  @endforeach
                 </div>
               </div>
             </div>

@@ -51,7 +51,10 @@
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                   <a class="dropdown-item" href="{{url('profile')}}">
-                    <i class="mdi mdi-cached mr-2 text-success"></i> Profile </a>
+                    <i class="mdi mdi-account-convert mr-2 text-success"></i> Profile </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{url('change-password')}}">
+                    <i class="mdi mdi-cached mr-2 text-success"></i> Change Password </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{url('logout')}}">
                     <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>

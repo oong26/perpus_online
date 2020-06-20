@@ -23,7 +23,21 @@ Route::get('logout', 'LoginController@logout');
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/profile', 'ProfileController@index');
+Route::prefix('profile')->group(function(){
+    
+    Route::get('/', 'ProfileController@index');
+
+    Route::post('update', 'ProfileController@update');
+
+});
+
+Route::prefix('change-password')->group(function(){
+    
+    Route::get('/', 'ProfileController@changePassword');
+
+    Route::post('update', 'ProfileController@updatePassword');
+
+});
 
 //Users
 Route::prefix('user')->group(function(){
@@ -58,19 +72,19 @@ Route::prefix('book')->group(function(){
     Route::delete('delete/{book_code}/{img}', 'BookController@delete');
 });
 
-Route::prefix('book-category')->group(function(){
+Route::prefix('book-genre')->group(function(){
 
-    Route::get('', 'CategoryController@index');
+    Route::get('', 'GenreController@index');
 
-    Route::get('add', 'CategoryController@add');
+    Route::get('add', 'GenreController@add');
     
-    Route::post('store', 'CategoryController@store');
+    Route::post('store', 'GenreController@store');
     
-    Route::get('edit/{id_category}', 'CategoryController@edit');
+    Route::get('edit/{id_genre}', 'GenreController@edit');
     
-    Route::post('update', 'CategoryController@update');
+    Route::post('update', 'GenreController@update');
     
-    Route::delete('delete/{id_category}', 'CategoryController@delete');
+    Route::delete('delete/{id_genre}', 'GenreController@delete');
 });
 
 Route::prefix('role')->group(function(){

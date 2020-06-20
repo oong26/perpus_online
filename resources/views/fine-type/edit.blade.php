@@ -17,7 +17,7 @@
         </h3>
         <nav aria-label="breadcrumb">
           <ul class="breadcrumb">
-              <a href="../fine-type">Fine Type</a>&nbsp;/&nbsp;Add new fine type
+              <a href="../role">Role</a>&nbsp;/&nbsp;Add new fine type
           </ul>
         </nav>
       </div>
@@ -26,24 +26,27 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Fine Type</h4>
-                  <p class="card-description"> Add new fine type </p>
-                  <form action="store" class="forms-sample" method="POST" enctype="multipart/form-data">
+                  <p class="card-description"> Edit fine type </p>
+                  @foreach ($data as $item)
+                  <form action="../update" class="forms-sample" method="POST" enctype="multipart/form-data">
                       {{ csrf_field() }}
+                    <input type="hidden" name="id_fine_type" value="{{$item->id_fine_type}}">
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
                           <label for="exampleInputName1">Fine</label>
-                          <input type="text" class="form-control" id="exampleInputName1" name="fine" placeholder="Fine">
+                          <input type="text" class="form-control" id="exampleInputName1" name="fine" value="{{$item->fine}}" placeholder="Fine">
                         </div>
                         <div class="form-group">
                           <label for="exampleInputName2">Type</label>
-                          <input type="text" class="form-control" id="exampleInputName2" name="type" placeholder="Type">
+                          <input type="text" class="form-control" id="exampleInputName2" name="type" value="{{$item->type}}" placeholder="Type">
                         </div>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <a href="../fine-type" class="btn btn-light">Cancel</a>
+                    <a href="../" class="btn btn-light">Cancel</a>
                   </form>
+                  @endforeach
                 </div>
               </div>
             </div>

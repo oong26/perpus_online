@@ -37,6 +37,7 @@
                             <th> Address </th>
                             <th> Phone </th>
                             <th> Role </th>
+                            <th> Is Active </th>
                             <th> Options </th>
                           </tr>
                         </thead>
@@ -51,6 +52,13 @@
                             <td> {{$data->address}} </td>
                             <td> {{$data->phone}} </td>
                             <td> {{$data->role}} </td>
+                            <td> 
+                                @if($data->is_active == 1)
+                                  Yes
+                                @else
+                                  No
+                                @endif
+                            </td>
                             <td> 
                                 <form class="form-group pull-right" action="user/delete/{{$data->user_code}}/{{$data->img}}" method="POST">
                                   {{csrf_field()}}

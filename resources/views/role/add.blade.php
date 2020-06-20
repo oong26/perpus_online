@@ -38,7 +38,7 @@
                       </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <a href="../user" class="btn btn-light">Cancel</a>
+                    <a href="../role" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>

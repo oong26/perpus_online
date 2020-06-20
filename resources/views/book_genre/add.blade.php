@@ -13,11 +13,11 @@
           <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-account-group"></i>
           </span>
-          Add new fine type
+          Add new book genre
         </h3>
         <nav aria-label="breadcrumb">
           <ul class="breadcrumb">
-              <a href="../fine-type">Fine Type</a>&nbsp;/&nbsp;Add new fine type
+              <a href="../book-genre">Book Genre</a>&nbsp;/&nbsp;Add new book genre
           </ul>
         </nav>
       </div>
@@ -25,24 +25,20 @@
           <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Fine Type</h4>
-                  <p class="card-description"> Add new fine type </p>
+                  <h4 class="card-title">Book Genre</h4>
+                  <p class="card-description"> Add new book genre </p>
                   <form action="store" class="forms-sample" method="POST" enctype="multipart/form-data">
                       {{ csrf_field() }}
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
-                          <label for="exampleInputName1">Fine</label>
-                          <input type="text" class="form-control" id="exampleInputName1" name="fine" placeholder="Fine">
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputName2">Type</label>
-                          <input type="text" class="form-control" id="exampleInputName2" name="type" placeholder="Type">
+                          <label for="exampleInputName1">Book Genre</label>
+                          <input type="text" class="form-control" id="exampleInputName1" name="genre" placeholder="Genre">
                         </div>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <a href="../fine-type" class="btn btn-light">Cancel</a>
+                    <a href="../role" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>

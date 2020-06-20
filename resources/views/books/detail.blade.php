@@ -41,7 +41,7 @@
                     <label>Author :</label>&nbsp;<label class="font-weight-light">{{$data['author']}}</label><br>
                     <label>Year :</label>&nbsp;<label class="font-weight-light">{{$data['year']}}</label><br>
                     <label>Publisher :</label>&nbsp;<label class="font-weight-light">{{$data['publisher']}}</label><br>
-                    <label>Category :</label>&nbsp;<label class="font-weight-light">{{$data['book_category']}}</label><br>
+                    <label>Genre :</label>&nbsp;<label class="font-weight-light">{{$data['book_genre']}}</label><br>
                     <label>Total page :</label>&nbsp;<label class="font-weight-light">{{$data['total_page']}}</label><br>
                     <label>Stock :</label>&nbsp;<label class="font-weight-light">{{$data['stock']}}</label><br>
                     <label>Offline Location :</label>&nbsp;<label class="font-weight-light">{{$data['location']}}</label><br>

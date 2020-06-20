@@ -84,6 +84,22 @@
                       </span>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="is_active">Is Active</label>
+                    <select class="form-control form-control-lg" id="is_active" name="is_active">
+                        <option>Select choice</option>
+                        @if($data->is_active == 1)
+                        <option value="1" selected>Yes</option>
+                        <option value="0">No</option>
+                        @elseif($data->is_active == 0)
+                        <option value="1">Yes</option>
+                        <option value="0" selected>No</option>
+                        @else
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                        @endif
+                    </select>
+                  </div>
                   <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
                   <a href="../" class="btn btn-light">Cancel</a>
                 </form>
