@@ -26,7 +26,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Users <i class="mdi mdi-account mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">150 Users</h2>
+                    <h2 class="mb-5">{{$users}} Users</h2>
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Books <i class="mdi mdi-book mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">454 Books</h2>
+                    <h2 class="mb-5">{{$books}} Books</h2>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Weekly Loaning <i class="mdi mdi-shopping mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">950 Books</h2>
+                    <h2 class="mb-5">{{$loans}} Books</h2>
                   </div>
                 </div>
               </div>
@@ -61,53 +61,37 @@
                         <thead>
                           <tr>
                             <th> User </th>
-                            <th> Subject </th>
+                            <th> Loan Code </th>
+                            <th> Book </th>
                             <th> Status </th>
-                            <th> Last Update </th>
-                            <th> Tracking ID </th>
+                            <th> Loan Date </th>
+                            <th> Return Date </th>
                           </tr>
                         </thead>
                         <tbody>
+                          @foreach($loan as $item)
                           <tr>
+                            <td> <img src="{{ url('/uploaded_files/profile_photos/'.$item->img) }}" class="mr-2" alt="image"> {{$item->name}} </td>
                             <td>
-                              <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image"> Ongsky </td>
-                            <td> Fund is not recieved </td>
-                            <td>
-                              <label class="badge badge-gradient-success">DONE</label>
+                              {{$item->loan_code}} 
                             </td>
-                            <td> Dec 5, 2017 </td>
-                            <td> WD-12345 </td>
-                          </tr>
-                          <tr>
                             <td>
-                              <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image"> Stella Johnson </td>
-                            <td> High loading time </td>
-                            <td>
-                              <label class="badge badge-gradient-info">PROGRESS</label>
+                              {{$item->title}}
                             </td>
-                            <td> Dec 12, 2017 </td>
-                            <td> WD-12346 </td>
-                          </tr>
-                          <tr>
                             <td>
-                              <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Michel </td>
-                            <td> Website down for one week </td>
-                            <td>
-                              <label class="badge badge-gradient-info">OVERDUE</label>
+                              {{-- <label class="badge badge-gradient-success">{{$item->status}}</label> --}}
+                              @if($item->status == 'Waiting')
+                              <label class="badge badge-gradient-warning">{{$item->status}}</label>
+                              @elseif($item->status == 'Borrowed')
+                              <label class="badge badge-gradient-info">{{$item->status}}</label>
+                              @elseif($item->status == 'Returned')
+                              <label class="badge badge-gradient-success">{{$item->status}}</label>
+                              @endif
                             </td>
-                            <td> Dec 16, 2017 </td>
-                            <td> WD-12347 </td>
+                            <td> {{$item->loan_date}} </td>
+                            <td> {{$item->return_date}} </td>
                           </tr>
-                          <tr>
-                            <td>
-                              <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image"> John Doe </td>
-                            <td> Loosing control on server </td>
-                            <td>
-                              <label class="badge badge-gradient-danger">OVERDUE</label>
-                            </td>
-                            <td> Dec 3, 2017 </td>
-                            <td> WD-12348 </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
