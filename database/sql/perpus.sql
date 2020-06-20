@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2020 at 07:41 AM
+-- Generation Time: Jun 16, 2020 at 04:49 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -35,7 +35,7 @@ CREATE TABLE `books` (
   `year` year(4) NOT NULL,
   `isbn` varchar(13) NOT NULL,
   `publisher` varchar(70) NOT NULL,
-  `id_book_category` int(4) NOT NULL,
+  `id_book_genre` int(4) NOT NULL,
   `summary` text NOT NULL,
   `stock` int(5) NOT NULL,
   `cover` varchar(255) NOT NULL,
@@ -51,26 +51,26 @@ CREATE TABLE `books` (
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` (`book_code`, `title`, `author`, `year`, `isbn`, `publisher`, `id_book_category`, `summary`, `stock`, `cover`, `total_page`, `location`, `is_available_online`, `pdf_file`, `created_at`, `updated_at`) VALUES
+INSERT INTO `books` (`book_code`, `title`, `author`, `year`, `isbn`, `publisher`, `id_book_genre`, `summary`, `stock`, `cover`, `total_page`, `location`, `is_available_online`, `pdf_file`, `created_at`, `updated_at`) VALUES
 ('B0001', 'Belajar Bahasa Pemrograman Java', 'Oong', 2017, '1234561112233', 'KONAMI', 2, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec imperdiet mauris. Morbi nec lobortis ante. Morbi condimentum mauris at leo ultrices, vel tincidunt sem laoreet. Nullam laoreet diam a commodo gravida. Vestibulum mattis nisl sapien. Morbi condimentum sit amet tortor eu fermentum. Etiam sagittis, tortor vitae molestie hendrerit, magna neque condimentum lectus, sollicitudin viverra arcu ipsum vel mauris. Duis bibendum faucibus urna ut hendrerit.</p>', 24, 'B0001Screenshot_1582380487.png', 220, 'Rak A', 'No', NULL, '2020-06-02 02:58:37', '2020-06-02 02:58:37'),
 ('B0002', 'Belajar HTML Dasar', 'Oong', 2015, '1112224445567', 'RPL', 2, '<p>Oong</p>', 8, 'B0002Screenshot_1579760092.png', 212, 'Rak A', 'No', NULL, '2020-06-02 03:26:55', '2020-06-02 05:05:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `book_category`
+-- Table structure for table `book_genre`
 --
 
-CREATE TABLE `book_category` (
-  `id_category` int(4) NOT NULL,
-  `book_category` varchar(40) NOT NULL
+CREATE TABLE `book_genre` (
+  `id_genre` int(4) NOT NULL,
+  `book_genre` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `book_category`
+-- Dumping data for table `book_genre`
 --
 
-INSERT INTO `book_category` (`id_category`, `book_category`) VALUES
+INSERT INTO `book_genre` (`id_genre`, `book_genre`) VALUES
 (1, 'Fiksi'),
 (2, 'Teknologi');
 
@@ -100,7 +100,7 @@ CREATE TABLE `loans` (
   `extend_date` datetime NOT NULL,
   `return_date` datetime NOT NULL,
   `id_fine_type` int(2) NOT NULL DEFAULT 0,
-  `status` varchar(20) NOT NULL
+  `status` varchar(20) NOT NULL DEFAULT 'Waiting' COMMENT 'Waiting, Borrowed, Returned'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -161,13 +161,13 @@ INSERT INTO `users` (`user_code`, `name`, `username`, `email`, `address`, `phone
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`book_code`),
-  ADD KEY `id_book_category` (`id_book_category`);
+  ADD KEY `id_book_category` (`id_book_genre`);
 
 --
--- Indexes for table `book_category`
+-- Indexes for table `book_genre`
 --
-ALTER TABLE `book_category`
-  ADD PRIMARY KEY (`id_category`);
+ALTER TABLE `book_genre`
+  ADD PRIMARY KEY (`id_genre`);
 
 --
 -- Indexes for table `fine_type`
@@ -204,10 +204,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `book_category`
+-- AUTO_INCREMENT for table `book_genre`
 --
-ALTER TABLE `book_category`
-  MODIFY `id_category` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `book_genre`
+  MODIFY `id_genre` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fine_type`
@@ -229,7 +229,7 @@ ALTER TABLE `role`
 -- Constraints for table `books`
 --
 ALTER TABLE `books`
-  ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`id_book_category`) REFERENCES `book_category` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`id_book_genre`) REFERENCES `book_genre` (`id_genre`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `loans`
